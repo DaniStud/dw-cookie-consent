@@ -1,0 +1,257 @@
+.dw-consent-wrap {
+    max-width: 1200px;
+}
+
+.dw-consent-content {
+    margin-top: 20px;
+}
+
+/* Scripts columns - drag and drop */
+.dw-scripts-columns {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.dw-scripts-column {
+    flex: 1;
+    background: #f0f0f1;
+    border-radius: 8px;
+    padding: 16px;
+    min-height: 200px;
+}
+
+.dw-scripts-column h2 {
+    margin-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #2271b1;
+}
+
+.dw-scripts-column[data-tier="marketing"] h2 {
+    border-bottom-color: #d63638;
+}
+
+.dw-sortable-list {
+    min-height: 100px;
+}
+
+.dw-script-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    transition: box-shadow 0.2s;
+}
+
+.dw-script-card:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.dw-script-card.ui-sortable-helper {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: rotate(1deg);
+}
+
+.dw-sortable-list .ui-sortable-placeholder {
+    border: 2px dashed #2271b1;
+    border-radius: 6px;
+    background: #e8f0fe;
+    height: 80px;
+    margin-bottom: 12px;
+    visibility: visible !important;
+}
+
+.dw-script-card-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 12px;
+    cursor: grab;
+}
+
+.dw-script-card-header:active {
+    cursor: grabbing;
+}
+
+.dw-drag-handle {
+    color: #8c8f94;
+    cursor: grab;
+}
+
+.dw-drag-handle:active {
+    cursor: grabbing;
+}
+
+.dw-script-card-header strong {
+    flex: 1;
+}
+
+.dw-script-card-body {
+    padding: 0 16px 12px;
+}
+
+.dw-script-card-body label {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.dw-script-card-body input.regular-text {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 4px;
+}
+
+/* Toggle switch */
+.dw-toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.dw-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dw-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #c3c4c7;
+    border-radius: 22px;
+    transition: 0.2s;
+}
+
+.dw-toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.dw-toggle input:checked + .dw-toggle-slider {
+    background-color: #2271b1;
+}
+
+.dw-toggle input:checked + .dw-toggle-slider::before {
+    transform: translateX(18px);
+}
+
+/* Custom scripts */
+.dw-custom-script-row {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.dw-custom-script-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+.dw-custom-script-fields label {
+    font-size: 13px;
+}
+
+.dw-custom-script-fields select {
+    margin-top: 4px;
+}
+
+.dw-toggle-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dw-remove-custom-script {
+    color: #d63638 !important;
+}
+
+/* Language tabs */
+.dw-language-tab-nav {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.dw-lang-tab {
+    transition: background 0.2s;
+}
+
+.dw-lang-tab-active {
+    background: #2271b1 !important;
+    color: #fff !important;
+    border-color: #2271b1 !important;
+}
+
+.dw-lang-panel {
+    display: none;
+}
+
+.dw-lang-panel-active {
+    display: block;
+}
+
+.dw-lang-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Log page */
+.dw-log-actions {
+    margin: 16px 0;
+}
+
+.dw-choice-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.dw-choice-analytics {
+    background: #e0f0ff;
+    color: #135e96;
+}
+
+.dw-choice-marketing {
+    background: #fce4e4;
+    color: #8a1c1c;
+}
+
+.dw-choice-rejected {
+    background: #f0f0f1;
+    color: #50575e;
+}
+
+.dw-ua-text {
+    font-size: 12px;
+    color: #646970;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .dw-scripts-columns {
+        flex-direction: column;
+    }
+}
