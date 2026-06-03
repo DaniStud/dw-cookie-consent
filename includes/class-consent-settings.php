@@ -310,8 +310,10 @@ class DW_Consent_Settings {
         $merged = $defaults;
         foreach ($stored as $key => $value) {
             if (is_array($value) && isset($defaults[$key]) && is_array($defaults[$key])) {
-                // For scripts/custom_scripts/banner_texts, use stored value entirely if present
-                if (in_array($key, ['scripts', 'custom_scripts', 'banner_texts'], true)) {
+                if ($key === 'scripts') {
+                    // Merge built-in scripts: keep stored values but add any new defaults
+                    $merged[$key] = self::merge_builtin_scripts($defaults[$key], $value);
+                } elseif (in_array($key, ['custom_scripts', 'banner_texts'], true)) {
                     $merged[$key] = $value;
                 } else {
                     $merged[$key] = self::merge_deep($defaults[$key], $value);
@@ -321,5 +323,21 @@ class DW_Consent_Settings {
             }
         }
         return $merged;
+    }
+
+    /**
+     * Merge built-in scripts: preserve stored entries, add any new defaults
+     * that don't exist yet (e.g. Matomo added in v2.1.0).
+     */
+    private static function merge_builtin_scripts($defaults, $stored) {
+        $stored_ids = array_column($stored, 'id');
+
+        foreach ($defaults as $default_script) {
+            if (!in_array($default_script['id'], $stored_ids, true)) {
+                $stored[] = $default_script;
+            }
+        }
+
+        return $stored;
     }
 }

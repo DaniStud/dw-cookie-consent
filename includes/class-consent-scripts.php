@@ -4,8 +4,8 @@ defined('ABSPATH') || exit;
 class DW_Consent_Scripts {
 
     public static function init() {
-        add_action('wp_head', [__CLASS__, 'output_consent_defaults'], 1);
-        add_action('wp_head', [__CLASS__, 'output_early_scripts'], 2);
+        add_action('wp_head', [__CLASS__, 'output_consent_defaults'], 0);
+        add_action('wp_head', [__CLASS__, 'output_early_scripts'], 1);
         add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_frontend']);
         add_action('wp_footer', [__CLASS__, 'output_banner'], 10);
         add_action('wp_footer', [__CLASS__, 'output_footer_scripts'], 21);
@@ -35,8 +35,8 @@ gtag('consent', 'default', {
 <?php if ($matomo_enabled) : ?>
 <script>
 var _paq = window._paq = window._paq || [];
-_paq.push(['requireConsent']);
-_paq.push(['requireCookieConsent']);
+_paq.unshift(['requireCookieConsent']);
+_paq.unshift(['requireConsent']);
 </script>
 <?php endif; ?>
         <?php
@@ -368,8 +368,8 @@ _paq.push(['setCookieConsentGiven']);
         $gtag_id = $ga4_id ?: $gads_id;
         if ($gtag_id) {
             ?>
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($gtag_id); ?>"></script>
-<script>
+<script id="dw-gtag-js" async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($gtag_id); ?>"></script>
+<script id="dw-script-<?php echo $ga4_id ? 'ga4' : 'gads'; ?>">
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
@@ -386,7 +386,7 @@ gtag('config', '<?php echo esc_js($gads_id); ?>');
         // Meta Pixel
         if ($meta_id) {
             ?>
-<script>
+<script id="dw-script-meta">
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -405,7 +405,7 @@ fbq('track', 'PageView');
         // LinkedIn Insight Tag
         if ($li_id) {
             ?>
-<script type="text/javascript">
+<script id="dw-script-linkedin" type="text/javascript">
 _linkedin_partner_id = "<?php echo esc_js($li_id); ?>";
 window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
 window._linkedin_data_partner_ids.push(_linkedin_partner_id);
@@ -427,7 +427,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         // Microsoft Clarity
         if ($clarity_id) {
             ?>
-<script type="text/javascript">
+<script id="dw-script-clarity" type="text/javascript">
 (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
